@@ -1,11 +1,12 @@
 import React from "react";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { deleteDocs } from "../../redux/actions";
 
 const DeletePrompt = ({ isOpen, setIsPromptOpen }) => {
   const dispatch = useDispatch();
+  const activeDoc = useSelector((state) => state.docs.activeDoc);
 
   const stopPropagation = (e) => {
     e.stopPropagation();
@@ -33,8 +34,8 @@ const DeletePrompt = ({ isOpen, setIsPromptOpen }) => {
           Delete this document?
         </span>
         <p className="my-4 text-neutral-600 dark:text-neutral-700 font-serif font-normal text-sm">
-          Are you sure you want to delete the ‘welcome.md’ document and its
-          contents? This action cannot be reversed.
+          Are you sure you want to delete the ‘{activeDoc?.name}’ document and
+          its contents? This action cannot be reversed.
         </p>
         <button
           data-testid="confirmDeletion"
